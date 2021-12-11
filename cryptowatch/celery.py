@@ -23,6 +23,12 @@ app.conf.beat_schedule = {
         'schedule': crontab(minute="*"),
 #'schedule': crontab(hour=0, minute=46, day_of_month=19, month_of_year = 6),
         # 'args': (2,)
+    },
+
+ 'coinpricetrack_task': {
+        'task': 'cryptoapp.tasks.trackcoinprice',
+        'schedule': crontab(minute="*/3 * * * *"),
+
     }
 
 

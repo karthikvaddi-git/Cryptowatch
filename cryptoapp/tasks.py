@@ -1,16 +1,13 @@
-from django.contrib.auth import get_user_model
 from cryptowatch import settings
 from celery import shared_task
-from celery import shared_task
-from .models import  Cryptodata
+from .models import  Cryptodata,Cointracker,Phonenumber
 import json
-#from .utils import get_random_code
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-#from celery.decorators import periodic_task
-#from celery.task.schedules import crontab
 import requests
 from django.core import serializers
+from twilio.rest import Client
+from decouple import config
 
 
 @shared_task
@@ -26,4 +23,72 @@ def get_crypto_data():
         p.rank = item['market_cap_rank']
         p.market_cap = item['market_cap']
         p.save()
+
+
+
+# Task to send coin price alert to user
+
+@shared_task
+def trackcoinprice():
+    pricerisesobjects = Cointracker.objects.filter(messagesent=False)
+    #   print(pricerisesobjects.triggerprice)
+
+    print(pricerisesobjects)
+    for item in pricerisesobjects:
+        triggerprice = item.triggerprice
+        coinname = item.name
+        try:
+            coinobject = Cryptodata.objects.get(name=coinname)
+        except Cryptodata.DoesNotExist:
+            user = None
+
+        phoneobj = Phonenumber.objects.get(user=item.user)
+        phonenumber = phoneobj.phone_number
+        coinprice = coinobject.price
+        if triggerprice >= coinprice:
+
+            # twillio sending message
+
+            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "a6a841cf8bb50923b9d5259a83e01e8e")
+            messagetext = "Your price rise alert for " + coinname
+
+            message = client.messages.create(from_="+12184801731", body=messagetext, to="+917396450288")
+            if message.sid:
+                Cointracker.objects.filter(user=item.user).filter( name=item.name).filter( pricerises=True) .update(messagesent=True)
+            else:
+
+                print("message was not sent ")
+
+
+
+        if triggerprice <= coinprice:
+            # account_sid = accounts_sid
+            # auth_token = auths_token
+            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", " a6a841cf8bb50923b9d5259a83e01e8e")
+
+            messagetext = "Your price drop alert for " + coinname
+
+            message = client.messages.create(from_="+12184801731", body=messagetext, to="+917396450288")
+            if message.sid:
+                Cointracker.objects.filter(user=item.user).filter(name=item.name).filter(pricerises=False).update(
+                    messagesent=True)
+
+
+            else:
+
+                print("message was not sent")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

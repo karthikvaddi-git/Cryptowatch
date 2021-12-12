@@ -17,6 +17,7 @@ def bot(request):
         return HttpResponse("helo in bot view")
 
     if request.method=='POST':
+        client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "1722757f5c8f5842bf9e53b88b298f25")
 
         print(request.POST)
         message = request.POST['Body']
@@ -25,7 +26,7 @@ def bot(request):
         print(message)
 
         if message == "1" :
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
             url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=1&sparkline=false'
             data = requests.get(url).json()
             messagetosend = " "
@@ -57,7 +58,7 @@ def bot(request):
                 print(e)
 
         if message == "2":
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
             url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=1&sparkline=false'
             data = requests.get(url).json()
             string1="https://cointelegraph.com/"
@@ -86,7 +87,7 @@ def bot(request):
 
 
         if message == "3":
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
             url='https://api.coingecko.com/api/v3/asset_platforms'
             data = requests.get(url).json()
             messagetosend=" "
@@ -113,7 +114,7 @@ def bot(request):
             except TwilioRestException as e:
                 print(e)
         if message == "4":
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
             url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=1&sparkline=false'
             data = requests.get(url).json()
             string1="coinswitch"
@@ -141,7 +142,7 @@ def bot(request):
                 print(e)
 
         if message == "5":
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
 
             string1 = "https://airdrops.io/"
             string2 = "https://www.binance.com/en/deposit-airdrop"
@@ -168,7 +169,7 @@ def bot(request):
 
 
         if message == "hi" or message =="HI" or message == "Hi":
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "326d9c470a84843106f42f173d203101")
+
             messagetosent= "hello "+sender_name
 
             temp=    """ this is your crypto watch bot provides you all crypto market information

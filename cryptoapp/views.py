@@ -4,7 +4,7 @@ from .models import Cointracker,Cryptodata,Phonenumber
 from decouple import config
 from twilio.rest import Client
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -23,21 +23,21 @@ def register(request):
         #    notification = client.notify.services("IS9c85d2b8056f1b8da34c582cc2408815").notifications.create(
          #       to_binding='{"binding_type":"sms", "address":"+917396450288"}',
           #      body='check twillio service notify')
-            return render(request, "cointrack.html")
+            return render(request, "registration.html")
 
 
     if request.method=='POST':
         print(request.POST)
-        username = request.POST.get('username',False)
-        print("the username is ")
-        print(username)
 
-        """"username=request.POST['username']
-        email=request.POST['email']
+
+        username=request.POST['username']
+        phonenumber=request.POST['phonenumber']
         password=request.POST['password']
-        user = User.objects.create_user(username=username, email=username, password=password)
-        user.save()"""
-
+        user = User.objects.create_user(username=username,password=password)
+        user.save()
+        countrycode=+91
+        phoneobj=Phonenumber(user=user,phone_number=phonenumber)
+        phoneobj.save()
         return HttpResponse("registered succesfully")
 
 
@@ -77,12 +77,15 @@ def cointrack(request):
         else:
             coinobj = Cointracker(user=request.user, name=coinname, triggerprice=coinprice)
             coinobj.save()
-        return HttpResponse(request.POST)
+        return render(request,'cointrack.html')
+
+def logoutfun(request):
+    logout(request)
+    return render(request,'home.html')
 
 
-
-
-
+def whatsappbot(request):
+    return render(request,"whatsappbot.html")
 
 
 

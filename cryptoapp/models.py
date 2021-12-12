@@ -30,7 +30,6 @@ class Cointracker(models.Model):
 
 class Phonenumber(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    countrycode = models.IntegerField()
     phone_number = models.IntegerField(unique=True)
 
     def __str__(self):

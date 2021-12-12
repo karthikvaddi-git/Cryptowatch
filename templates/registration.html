@@ -1,3 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <title>Title</title>
+          <link
+               href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+               rel="stylesheet"
+               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+               crossorigin="anonymous"
+          />
+          <style>
+               body {
+                    font-family: 'Times New Roman', Georgia, Serif;
+               }
+               h1,
+               h2,
+               h3,
+               h4,
+               h5,
+               h6 {
+                    font-family: 'Playfair Display';
+                    letter-spacing: 5px;
+               }
+          </style>
+          <link
+               rel="stylesheet"
+               href="https://www.w3schools.com/w3css/4/w3.css"
+          />
+     </head>
+     <body>
+          <div class="w3-top">
+               <div
+                    class="w3-bar w3-white w3-padding w3-card"
+                    style="letter-spacing: 4px"
+               >
+                    <a href="#home" class="w3-bar-item w3-button"
+                         >Cryptowatch</a
+                    >
+                    <!-- Right-sided navbar links. Hide them on small screens -->
+                    <div class="w3-right w3-hide-small">
+                         <a
+                              href="{% url 'logintoweb' %}"
+                              class="btn btn-primary"
+                              >Logout</a
+                         >
+                    </div>
+               </div>
+          </div>
+          <div
+               class="row"
+               style="
+                    justify-content: center;
+                    align-content: center;
+                    display: flex;
+                    margin-top: 100px;
+               "
+          >
 <form action="{% url 'register' %}" method="POST">
 
   <div class="container">
@@ -5,21 +63,21 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <label for="email"><b>Username</b></label>
+    <input type="text" placeholder="Enter Email"  id="username" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <input type="password" placeholder="Enter Password" id="passsword" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+    <label for="psw-repeat"><b>Phone number</b></label>
+    <input type="text" placeholder="+9173**********"  id="phonenumber" required>
     <hr>
 
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
     <button type="submit" class="registerbtn">Register</button>
   </div>
 
   <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
+    <p>Already have an account? <a href="{% url 'logintoweb' %}">Sign in</a>.</p>
   </div>
 </form>

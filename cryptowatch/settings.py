@@ -163,3 +163,7 @@ CSRF_COOKIE_SECURE=True
 
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
+LOGIN_REDIRECT_URL = 'cointrack'
+LOGIN_URL='logintoweb'

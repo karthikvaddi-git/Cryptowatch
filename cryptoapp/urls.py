@@ -4,6 +4,7 @@ from django.urls import path,include
 from . import views as v
 urlpatterns = [
     path('',v.register,name='register'),
- #   path('bot',include("whatsappbot.urls"))
+    path('logintoweb/',v.logintoweb,name='logintoweb'),
+    path('cointrack',v.cointrack,name='cointrack')
 
     ]

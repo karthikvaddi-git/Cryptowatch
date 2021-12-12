@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>hello defasdaf</h1>
+<form action="{% url 'logintoweb' %}" method="post">
+    {% csrf_token %}
+    <label for="your_name">Your name: </label>
+    <input id="username" type="text" name="username">
+     <label for="password">password: </label>
+    <input id="password" type="text" name="password">
+
+    <input type="submit" value="OK">
+    <submit>clickher</submit>
+</form>
+
+</body>
+</html>

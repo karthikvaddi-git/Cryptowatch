@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>hello defasdaf</h1>
+<form action="{% url 'cointrack' %}" method="post">
+    {% csrf_token %}
+    <label for="your_name">coinname: </label>
+    <input id="coinname" type="text" name="coiname">
+     <label for="password">coinprice: </label>
+    <input id="coinprice" type="text" name="coinprice">
+<input type="radio" id="coinrise" name="fav_language" value="coinrise">
+<label for="html">coinrise</label><br>
+<input type="radio" id="coinfall" name="fav_language" value="coinfall">
+<label for="css">coinfall</label><br>
+<input type="submit" value="OK">
+    <submit>track</submit>
+</form>
+
+</body>
+</html>

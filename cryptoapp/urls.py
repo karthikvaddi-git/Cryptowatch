@@ -8,7 +8,7 @@ urlpatterns = [
     path('logintoweb/',v.logintoweb,name='logintoweb'),
     path('cointrack',v.cointrack,name='cointrack'),
     path('logoutweb',v.logoutfun,name='logoutfun'),
-#    path('whatsappbot',v.whatsappbot,name='whatsappbot')
+    path('whatsappbot',v.whatsappbot,name='whatsappbot')
 
     ]
 

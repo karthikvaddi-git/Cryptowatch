@@ -85,7 +85,7 @@ def logoutfun(request):
 
 
 def whatsappbot(request):
-    return render(request,"whatsappbot.html")
+    return render(request,"whatsapp.html")
 
 
 

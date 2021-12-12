@@ -30,6 +30,7 @@ def get_crypto_data():
 
 @shared_task
 def trackcoinprice():
+    client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "1722757f5c8f5842bf9e53b88b298f25")
     pricerisesobjects = Cointracker.objects.filter(messagesent=False)
     #   print(pricerisesobjects.triggerprice)
 
@@ -49,10 +50,11 @@ def trackcoinprice():
 
             # twillio sending message
 
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", "a6a841cf8bb50923b9d5259a83e01e8e")
+
             messagetext = "Your price rise alert for " + coinname
 
-            message = client.messages.create(from_="+12184801731", body=messagetext, to="+917396450288")
+
+            message = client.messages.create(from_="+12184801731", body=messagetext, to=phonenumber)
             if message.sid:
                 Cointracker.objects.filter(user=item.user).filter( name=item.name).filter( pricerises=True) .update(messagesent=True)
             else:
@@ -64,11 +66,11 @@ def trackcoinprice():
         if triggerprice <= coinprice:
             # account_sid = accounts_sid
             # auth_token = auths_token
-            client = Client("AC1ac2e6dd551790ba9dcd1d3464eab564", " a6a841cf8bb50923b9d5259a83e01e8e")
+
 
             messagetext = "Your price drop alert for " + coinname
 
-            message = client.messages.create(from_="+12184801731", body=messagetext, to="+917396450288")
+            message = client.messages.create(from_="+12184801731", body=messagetext, to=phonenumber)
             if message.sid:
                 Cointracker.objects.filter(user=item.user).filter(name=item.name).filter(pricerises=False).update(
                     messagesent=True)

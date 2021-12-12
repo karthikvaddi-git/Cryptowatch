@@ -18,5 +18,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include("cryptoapp.urls"))
+    path('',include("cryptoapp.urls")),
+    path('bot',include("whatsappbot.urls"))
+
 ]
